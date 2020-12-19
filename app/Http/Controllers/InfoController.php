@@ -43,7 +43,7 @@ class InfoController extends Controller
         $info->name = $request->name;
         $info->browser = $request->browser;
         $info->save();
-        Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com", "crlnkurniawan@gmail.com", "feliciakurniawann06@gmail.com"])->send(new VisitMail($info));
+        Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com", "crlnkurniawan@gmail.com", "feliciakurniawann06@gmail.com", "vellin1999@gmail.com"])->send(new VisitMail($info));
         // Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com"])->send(new VisitMail($info));
         return 200;
     }

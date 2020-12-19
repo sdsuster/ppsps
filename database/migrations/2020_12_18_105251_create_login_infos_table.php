@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInfosTable extends Migration
+class CreateLoginInfosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('infos', function (Blueprint $table) {
-                $table->id();
-                $table->text('name');
-                $table->text('ip');
-            $table->longText('browser');
+        Schema::create('login_infos', function (Blueprint $table) {
+            $table->id();
+            $table->integer('attempt');
+            $table->text('password');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('infos');
+        Schema::dropIfExists('login_infos');
     }
 }

